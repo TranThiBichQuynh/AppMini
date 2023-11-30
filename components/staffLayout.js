@@ -9,6 +9,16 @@ import { Link } from '@mui/material';
 export const siteTitle = 'Next.js Sample Website'
 
 export default function StaffLayout({ children, staff }) {
+    const nextjsDistDir = join("src", require("./src/next.config.js").distDir);
+    const nextjsServer = next({
+        dev: isDev,
+        conf: {
+            distDir: nextjsDistDir,
+            images: {
+                domains: ['firebasestorage.googleapis.com'],
+            }
+        }
+    });
   return (
     <div className={styles.container}>
       <Head>
