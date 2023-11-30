@@ -4,11 +4,13 @@ import { createMicrocmsClient } from "../../lib/microcmsClient";
 import { LiffContext } from "../_app";
 import { useContext, useEffect, useState } from 'react'
 import { createReservation, getReservations } from "../../lib/useReservations";
-import { Snackbar, Alert } from '@mui/material';
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button, Snackbar, Alert } from '@mui/material';
+import { red, grey } from '@mui/material/colors';
 import { lineNotify } from "../../lib/lineNotify";
-import { createReservationData } from '../../lib/util'
+import { fetchThisWeeks, isIncludeWorkday, getReservation, createReservationData } from '../../lib/util'
 import { useRouter } from 'next/router'
 
+//var weekJp = ["日", "月", "火", "水", "木", "金", "土"];
 
 export default function Staff({ serviceDomain, microcmsApiKey }) {
   const { profile } = useContext(LiffContext);
@@ -43,14 +45,15 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
   if(!staff || !reservations) {
     return <></>
   }
-
+  //const workdays = staff.workdays.map((e) => new Date(e.workday));
+  //const dates = fetchThisWeeks();
   const reserve = (staffId, profile) => {
     const reservation = createReservationData( staffId, profile)
     createReservation(client, reservation, staff, () => {
       setReservations([...reservations, reservation])
-
+      //const date = new Date(reservation.reservationAt).toLocaleString()
       const message = `${staff.staffName}さん：${reservation.userName}様の`
-
+      //const userMessage = `${date}の予約をしました`
       lineNotify(message)
       setSnackMessage(userMessage)
     })

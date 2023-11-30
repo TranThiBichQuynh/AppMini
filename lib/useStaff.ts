@@ -21,19 +21,19 @@ export const createRandomStaff = (): Staff => {
   return staff;
 }
 
-export const createStaff = (microcmsClient: any, successCallback: any, staff: any) => {
+export const createStaff = (microcmsClient, successCallback, staff) => {
   microcmsClient.create({
     endpoint: 'staffs',
     content: staff,
   })
   .then(successCallback)
-  .catch((err: any) => console.error(err));
+  .catch((err) => console.error(err));
 
   return staff;
 }
 
 // workshop: deleteStaff を追加しましょう
-export const deleteUser = (microcmsClient: any, successCallback: any, staff: any) => {
+export const deleteUser = (microcmsClient, successCallback, staff) => {
   // コードを追加しましょう！
   return staff;
 }

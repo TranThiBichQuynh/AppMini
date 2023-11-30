@@ -191,17 +191,17 @@ export default function Home({ _staffs, serviceDomain, apiKey }) {
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
   const client = createMicrocmsClient({
-    serviceDomain: process.env.SERVICE_DOMAIN,
-    apiKey: process.env.MICROCMS_API_KEY,
+    serviceDomain: process.env?.SERVICE_DOMAIN,
+    apiKey: process.env?.MICROCMS_API_KEY,
   });
   const staffsData = await client?.get({ endpoint: "staffs" });
 
   return {
     props: {
       _staffs: staffsData.contents,
-      serviceDomain: process.env.SERVICE_DOMAIN,
-      apiKey: process.env.MICROCMS_API_KEY,
-      liffId: process.env.LIFF_ID
+      serviceDomain: process.env?.SERVICE_DOMAIN,
+      apiKey: process.env?.MICROCMS_API_KEY,
+      liffId: process.env?.LIFF_ID
     },
   };
 };

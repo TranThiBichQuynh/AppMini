@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/global.css";
 import { useEffect, useState, createContext } from "react";
 
 export const LiffContext = createContext({});
