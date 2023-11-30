@@ -35,7 +35,7 @@ export default function Home({ _staffs, serviceDomain, apiKey }) {
     })
   }, [profile])
 
-  const previousReservations = getPreviousReservations(reservations)
+  //const previousReservations = getPreviousReservations(reservations)
 
   return (
       <Layout home>

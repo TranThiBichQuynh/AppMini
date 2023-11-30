@@ -51,11 +51,7 @@ export const createReservationData = (date: any, staffId: any, profile: any) => 
   return {
     userName: profile.displayName,
     lineId: profile.userId,
-    staff: staffId,
-    course: 1,
-    reservationAt: date,
-    clientFreeForm: '',
-    staffFreeForm: `${profile.displayName}様 ご予約ありがとうございます。お待ちしております。`,
+    staff: staffId
   }
 }
 

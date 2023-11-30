@@ -4,10 +4,6 @@ export interface Reservation {
   userName: string;
   lineId: string;
   staff: any;
-  course: number;
-  reservationAt: Date;
-  clientFreeForm: string;
-  staffFreeForm: string;
 }
 
 export const createReservation = (microcmsClient: any, reservation: Reservation, staff: Staff, success = () => {}) => {
