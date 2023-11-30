@@ -37,7 +37,6 @@ export default function StaffLayout({ children, staff }) {
         {
           staff.photo?.url ?
           <Image
-              loader={()=>user.coverImage}
             priority
             src={staff.photo.url}
             className={utilStyles.borderCircle}
