@@ -28,14 +28,14 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
       endpoint: `staffs/${id}`
     }).then((content) => {
       setStaff(content)
-      getReservations(client, `staff[equals]${staff.id}`).then((_reservations) => {
+      getReservations(client, `staff[equals]${staff?.id}`).then((_reservations) => {
         setReservations(_reservations)
       })
     })
   }, [router])
 
   useEffect(() => {
-    getReservations(client, `staff[equals]${staff.id}`).then((_reservations) => {
+    getReservations(client, `staff[equals]${staff?.id}`).then((_reservations) => {
       setReservations(_reservations)
     })
   }, [staff])
