@@ -4,7 +4,7 @@ export interface Workday {
   date: Date;
 }
 
-export const createDummyWorkday = (workdays) => {
+export const createDummyWorkday = (workdays: any) => {
   if(workdays.length !== 0) workdays;
   const today = new Date()
   const randomWorkdays = [1,2,3,4,5,6,7]

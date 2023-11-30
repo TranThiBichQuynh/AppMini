@@ -1,4 +1,4 @@
-export const lineNotify = (message) => {
+export const lineNotify = (message: any) => {
     const params = new URLSearchParams({
         message: message,
     });
