@@ -3,7 +3,7 @@
 const BASE_URL = 'https://notify-api.line.me';
 const PATH =  '/api/notify';
 
-const config = (params) => ({
+const config = (params: any) => ({
     method: 'POST',
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -12,7 +12,7 @@ const config = (params) => ({
     body: params.toString()
 })
 
-export default async (req, res) => {
+export default async (req: any, res: any) => {
   //console.log(req.query.message)
     console.log('bug')
   const params = new URLSearchParams({
