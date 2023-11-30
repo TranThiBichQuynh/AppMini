@@ -89,9 +89,9 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
 export async function getStaticProps() {
   return {
     props: {
-      liffId: process.env?.LIFF_ID,
-      serviceDomain: process.env?.SERVICE_DOMAIN,
-      microcmsApiKey: process.env?.MICROCMS_API_KEY
+      liffId: process.env.LIFF_ID,
+      serviceDomain: process.env.SERVICE_DOMAIN,
+      microcmsApiKey: process.env.MICROCMS_API_KEY
     }
   }
 }
