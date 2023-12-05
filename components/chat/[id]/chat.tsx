@@ -1,7 +1,7 @@
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 
-export function Chat() {
+export function Chat({params} : {params : {id: string}}) {
    return(
        <div className="flex w-auto h-auto">
            <div>

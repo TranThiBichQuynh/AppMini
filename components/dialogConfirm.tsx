@@ -7,7 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import {Chat} from "./chat";
+import {Chat} from "./chat/[id]/chat";
 import Link from "next/link";
 export function DialogConfirm() {
     const [open, setOpen] = React.useState(false);
