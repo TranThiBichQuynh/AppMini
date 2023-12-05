@@ -9,6 +9,7 @@ import { red, grey } from '@mui/material/colors';
 import { lineNotify } from "../../lib/lineNotify";
 import { fetchThisWeeks, isIncludeWorkday, getReservation, createReservationData } from '../../lib/util'
 import { useRouter } from 'next/router'
+import {DialogConfirm} from "../../components/dialogConfirm";
 
 //var weekJp = ["日", "月", "火", "水", "木", "金", "土"];
 
@@ -64,7 +65,6 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
       <Head>
         <title>{staff.staffName}</title>
       </Head>
-      <article>
         <section>
           <div>
             <p className='font-bold flex'>実務経験</p>
@@ -73,6 +73,9 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
           <div>
             <p className='font-bold'>スキル</p>
             <p>{staff.skills}</p>
+          </div>
+          <div>
+            <DialogConfirm/>
           </div>
         </section>
         {
@@ -88,7 +91,6 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
             </Alert>
           </Snackbar>
         }
-      </article>
     </StaffLayout>
   )
 }

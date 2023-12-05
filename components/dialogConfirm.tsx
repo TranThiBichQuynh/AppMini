@@ -8,12 +8,12 @@ import Dialog from '@mui/material/Dialog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import {Chat} from "./chat";
+import Link from "next/link";
 export function DialogConfirm() {
     const [open, setOpen] = React.useState(false);
     const [ok, setOk] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -23,7 +23,7 @@ export function DialogConfirm() {
     };
 
     const handleOk = (props: any) => {
-
+        //this.history.push('/chat')
     }
     return (
         <React.Fragment>
@@ -48,8 +48,8 @@ export function DialogConfirm() {
                     <Button autoFocus onClick={handleClose}>
                         No
                     </Button>
-                    <Button onClick={handleOk} autoFocus>
-                        Yes
+                    <Button autoFocus>
+                        <Link href={`/chat`}>Yes</Link>
                     </Button>
                 </DialogActions>
             </Dialog>

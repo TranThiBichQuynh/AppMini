@@ -13,7 +13,6 @@ import { lineNotify } from "../lib/lineNotify";
 import styles from '../components/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import { getPreviousReservations, dateToString } from "../lib/util";
-import {DialogConfirm} from "../components/dialogConfirm";
 
 export default function Home({ _staffs, serviceDomain, apiKey }) {
   const { liffObject: liff, profile, setLiffState } = useContext(LiffContext);
@@ -43,7 +42,6 @@ export default function Home({ _staffs, serviceDomain, apiKey }) {
         <Head>
           <title>{siteTitle}</title>
         </Head>
-        <DialogConfirm/>
         {profile && (
             <>
               <header className={styles.header}>
@@ -138,7 +136,6 @@ export default function Home({ _staffs, serviceDomain, apiKey }) {
               >ログイン</Button>
           }
         </Container>
-
         { /* ログイン済み */
             profile && <Container>
               <h2>予約一覧</h2>

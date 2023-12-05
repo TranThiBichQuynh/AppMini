@@ -3,17 +3,17 @@ import Button from "@mui/material/Button";
 
 export function Chat() {
    return(
-       <div className="grid-rows-2 gap-5">
-           <div className="mb-5">
+       <div className="flex w-auto h-auto">
+           <div>
                <TextField
                    id="outlined-textarea"
                    label="Chat"
                    placeholder="どうなさいました？"
                    multiline
-                   style={{width: '800px'}}
+                   style={{width: '800px', margin: '30px 0px'}}
                />
            </div>
-           <div className="mt-10">
+           <div>
                <Button variant="outlined">送信</Button>
            </div>
        </div>
