@@ -67,11 +67,11 @@ export default function Staff({ serviceDomain, microcmsApiKey }) {
       <article>
         <section>
           <div>
-            <p className='font-bold'>実務経験</p>
+            <p className='font-bold flex'>実務経験</p>
             <p>{staff.experience}</p>
           </div>
           <div>
-            <p className='bold'>スキル</p>
+            <p className='font-bold'>スキル</p>
             <p>{staff.skills}</p>
           </div>
         </section>

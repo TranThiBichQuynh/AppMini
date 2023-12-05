@@ -69,52 +69,6 @@ export default function Home({ _staffs, serviceDomain, apiKey }) {
               </p>
             </header>
         )}
-        <Container sx={{ marginBottom: 5 }}>
-          <h2>スタッフ一覧</h2>
-          <List>
-            {staffs.map((staff) => (
-                <ListItem
-                    key={staff.id}
-                    secondaryAction={
-                      <IconButton
-                          onClick={() => {
-                            // workshop: deleteStaff を追加しましょう
-                            if(!confirm("スタッフを削除しますか？"))return;
-                            microcmsClient
-                                .delete({
-                                  endpoint: 'staffs',
-                                  contentId: staff.id,
-                                })
-                                .then(() => {
-                                  const newStaffs = staffs.filter((_staff) => _staff.id != staff.id)
-                                  setStaff(newStaffs)
-                                  setSnackMessage(`${staff.staffName}を削除しました`)
-                                })
-                                .catch((err) => console.error(err));
-                          }}
-                          aria-label=""
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    }
-                >
-                  <Link href={`/staffs?id=${staff.id}`}>{staff.staffName}</Link>
-                </ListItem>
-            ))}
-          </List>
-          <Button
-              variant="contained"
-              onClick={() => {
-                const staff = createRandomStaff()
-                createStaff(microcmsClient, (res) => {
-                  setStaff([{ id: res.id, ...staff }, ...staffs])
-                }, staff);
-                setSnackMessage(`${staff.staffName}を追加しました`)
-              }}
-          >
-            ハンズオン用にmicroCMS上に新規スタッフ作成
-          </Button>
-        </Container>
 
         <Container>
           { profile ?
