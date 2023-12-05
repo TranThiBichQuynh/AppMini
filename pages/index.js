@@ -13,6 +13,7 @@ import { lineNotify } from "../lib/lineNotify";
 import styles from '../components/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import { getPreviousReservations, dateToString } from "../lib/util";
+import {DialogConfirm} from "./dialogConfirm";
 
 export default function Home({ _staffs, serviceDomain, apiKey }) {
   const { liffObject: liff, profile, setLiffState } = useContext(LiffContext);
@@ -42,32 +43,81 @@ export default function Home({ _staffs, serviceDomain, apiKey }) {
         <Head>
           <title>{siteTitle}</title>
         </Head>
+        <DialogConfirm/>
         {profile && (
-            <header className={styles.header}>
-              <Image
-                  priority
-                  src={profile.pictureUrl}
-                  className={utilStyles.borderCircle}
-                  height={144}
-                  width={144}
-                  alt={profile.displayName}
-              />
-              <h1 className={utilStyles.headingMd}>{profile.displayName}</h1>
-              <p className={utilStyles.lightText}>
-                こんにちは、{profile.displayName}さん、しげサロンへようこそ！<br/>
+            <>
+              <header className={styles.header}>
+                <Image
+                    priority
+                    src={profile.pictureUrl}
+                    className={utilStyles.borderCircle}
+                    height={144}
+                    width={144}
+                    alt={profile.displayName}
+                />
+                <h1 className={utilStyles.headingMd}>{profile.displayName}</h1>
+                <p className={utilStyles.lightText}>
+                  こんにちは、{profile.displayName}さん、しげサロンへようこそ！<br/>
 
-                {
-                  previousReservations.length != 0 ?
-                      <>
-                        来店ポイント {previousReservations.length} pt です。
-                        前回の来店は {dateToString(previousReservations[0].reservationAt)} です。
-                      </> :
-                      `はじめまして、お客様に合った最高のヘアスタイルをご提供できるよう、スタッフ一同心よりお待ちしております。`
-                }
-                <br/>
-                <br />
-              </p>
-            </header>
+                  {
+                    previousReservations.length != 0 ?
+                        <>
+                          来店ポイント {previousReservations.length} pt です。
+                          前回の来店は {dateToString(previousReservations[0].reservationAt)} です。
+                        </> :
+                        `はじめまして、お客様に合った最高のヘアスタイルをご提供できるよう、スタッフ一同心よりお待ちしております。`
+                  }
+                  <br/>
+                  <br />
+                </p>
+              </header>
+              <body>
+              <h2>スタッフ一覧</h2>
+              <List>
+                {staffs.map((staff) => (
+                    <ListItem
+                        key={staff.id}
+                        secondaryAction={
+                          <IconButton
+                              onClick={() => {
+                                // workshop: deleteStaff を追加しましょう
+                                if(!confirm("スタッフを削除しますか？"))return;
+                                microcmsClient
+                                    .delete({
+                                      endpoint: 'staffs',
+                                      contentId: staff.id,
+                                    })
+                                    .then(() => {
+                                      const newStaffs = staffs.filter((_staff) => _staff.id != staff.id)
+                                      setStaff(newStaffs)
+                                      setSnackMessage(`${staff.staffName}を削除しました`)
+                                    })
+                                    .catch((err) => console.error(err));
+                              }}
+                              aria-label=""
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        }
+                    >
+                      <Link href={`/staffs?id=${staff.id}`}>{staff.staffName}</Link>
+                    </ListItem>
+                ))}
+              </List>
+              <Button
+                  variant="contained"
+                  onClick={() => {
+                    const staff = createRandomStaff()
+                    createStaff(microcmsClient, (res) => {
+                      setStaff([{ id: res.id, ...staff }, ...staffs])
+                    }, staff);
+                    setSnackMessage(`${staff.staffName}を追加しました`)
+                  }}
+              >
+                ハンズオン用にmicroCMS上に新規スタッフ作成
+              </Button>
+              </body>
+            </>
         )}
 
         <Container>
@@ -145,17 +195,17 @@ export default function Home({ _staffs, serviceDomain, apiKey }) {
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
   const client = createMicrocmsClient({
-    serviceDomain: process.env.SERVICE_DOMAIN,
-    apiKey: process.env.MICROCMS_API_KEY,
+    serviceDomain: process.env?.SERVICE_DOMAIN,
+    apiKey: process.env?.MICROCMS_API_KEY,
   });
   const staffsData = await client?.get({ endpoint: "staffs" });
 
   return {
     props: {
       _staffs: staffsData.contents,
-      serviceDomain: process.env.SERVICE_DOMAIN,
-      apiKey: process.env.MICROCMS_API_KEY,
-      liffId: process.env.LIFF_ID
+      serviceDomain: process.env?.SERVICE_DOMAIN,
+      apiKey: process.env?.MICROCMS_API_KEY,
+      liffId: process.env?.LIFF_ID
     },
   };
 };
