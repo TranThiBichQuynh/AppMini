@@ -74,7 +74,7 @@ export default function Home({ _staffs, serviceDomain, apiKey }) {
               <List>
                 {staffs.map((staff) => (
                     <ListItem
-                        key={staff.id}
+                        key={staff?.id}
                         secondaryAction={
                           <IconButton
                               onClick={() => {
